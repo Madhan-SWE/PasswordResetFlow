@@ -1,0 +1,133 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validate URL</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+          body{
+          background-color : #ebf5fa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="passwordResetBlock">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <form action="" class="border border-dark p-5 m-3 bg-light">
+            <h1 class="display-7">Create a New Password</h1>
+            <div class="form-group">
+              <label for="newPassword">New Password: </label>
+              <input
+                type="password"
+                class="form-control"
+                id="newPassword"
+                aria-describedby="emailHelp"
+                placeholder="Enter new password here"
+              />
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password: </label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                aria-describedby="emailHelp"
+                placeholder="Confirm password here"
+              />
+            </div>
+            <button
+              type="button"
+              onclick="validateAndSubmitPasswords()"
+              class="btn btn-primary"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="validationDiv">
+      <h1 class="display-6">Validating URL ......</h1>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const token = urlParams.get("token");
+      // console.log(token);
+      const Email = urlParams.get("email");
+      // console.log(Email);
+      function validateUrl() {
+        
+        fetch(url + "/users/resetPassword/url/" + token, {
+          method: "POST",
+          body: JSON.stringify({ EmailId: Email }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((resp) => resp.json())
+          .then((res) => {
+            // console.log(res);
+            if (!res.result) {
+              alert(res.message);
+              window.location.href = "index.html";
+            } else {
+              alert("PASS: " + res.message);
+              // console.log("----");
+              document.getElementById("passwordResetBlock").style.display =
+                "inherit";
+              document.getElementById("validationDiv").style.display = "none";
+            }
+          });
+      }
+
+      function validateAndSubmitPasswords() {
+        let newPassword = document.getElementById("newPassword").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let passwordFormat = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}";
+        fetchUrl = url + "/users/" + Email;
+
+        if (newPassword !== confirmPassword) {
+          alert("Passwords Don't match !");
+          return;
+        }
+        if (newPassword.length < 10 || newPassword.length > 15) {
+          alert("Passwords Length should be >= 10 and <=15");
+          return;
+        }
+        if (!newPassword.match(passwordFormat)) {
+          alert(
+            "Must contain at least one number and one uppercase and lowercase letter, and at least 10 or more characters"
+          );
+          return;
+        }
+
+        fetch(fetchUrl, {
+          method: "PUT",
+          body: JSON.stringify({ password: newPassword }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            // console.log("Response: " + res.result);
+            if (!res.result) {
+              alert("Failed to Update Password !");
+              return;
+            }
+            alert("Password Updated Successfully !");
+            window.location.href = "index.html";
+          });
+      }
+      document.getElementById("passwordResetBlock").style.display = "none";
+      validateUrl();
+    </script>
+  </body>
+</html>

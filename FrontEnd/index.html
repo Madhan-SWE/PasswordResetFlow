@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: #ebf5fa;
+        }
+    </style>
+    </head>
+<body>
+    <div class="container">
+        <div class="row">
+         <div class="col-lg-6 offset-lg-3">
+         <form action="" class="border border-dark p-5 m-3 bg-light" >
+            <h2 class="display-5">Password Reset Flow</h2>
+             <div class="form-group">
+                 <label for="Email"> Enter yout email here: </label>
+                 <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+             </div>
+             <button type="button" onclick="getUser()" class="btn btn-primary">Get Reset Link</button>
+             <button type="button" class="btn btn-success" onclick="RegisterMail()">Register Mail Id</button>
+         </form>
+         <p>
+             To test with your mail Id, type your mail Id here and click Register Mail Id.
+         </p>
+         </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
