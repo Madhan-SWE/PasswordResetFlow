@@ -1,5 +1,5 @@
 
-var url = "http://localhost:3000"
+var url = "https://passwordresetflow.herokuapp.com"
 function getUser()
 {
     

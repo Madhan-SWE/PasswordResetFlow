@@ -12,7 +12,7 @@ app.use(cors());
 
 const port = process.env.PORT || 3000;
 const dbUrl = process.env.DBURL || "mongodb+srv://rcmk:Hm6hGfpOyzIqq6Gm@cluster0.pyaww.mongodb.net/<dbname>?retryWrites=true&w=majority";
-const frontEnd = process.env.FRONTEND || "http://127.0.0.1:5500/";
+const frontEnd = process.env.FRONTEND || "https://madhan-password-resetflow.netlify.app/";
 var SendMail = (emailId, message) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
