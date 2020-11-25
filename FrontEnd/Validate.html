@@ -90,7 +90,6 @@
       function validateAndSubmitPasswords() {
         let newPassword = document.getElementById("newPassword").value;
         let confirmPassword = document.getElementById("confirmPassword").value;
-        let passwordFormat = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}";
         fetchUrl = url + "/users/" + Email;
 
         if (newPassword !== confirmPassword) {
@@ -99,12 +98,6 @@
         }
         if (newPassword.length < 10 || newPassword.length > 15) {
           alert("Passwords Length should be >= 10 and <=15");
-          return;
-        }
-        if (!newPassword.match(passwordFormat)) {
-          alert(
-            "Must contain at least one number and one uppercase and lowercase letter, and at least 10 or more characters"
-          );
           return;
         }
 
