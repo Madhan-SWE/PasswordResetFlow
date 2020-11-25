@@ -47,7 +47,7 @@ var generateMessage = (emailId) => {
     for (let i = 0; i < charactersLength; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    let additionalUrl = "FrontEnd/Validate.html";
+    let additionalUrl = "Validate.html";
     randomString = frontEnd + additionalUrl + "?token=" + result + "&email=" + emailId;
     message = "<p style='color:black;font-weight:bold'> Please click the below url </p> <br>" + "<a href='" + randomString + "'>" + randomString + "</a>";
     return [message, result];
