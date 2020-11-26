@@ -13,19 +13,22 @@ app.use(cors());
 const port = process.env.PORT || 3000;
 const dbUrl = process.env.DBURL;
 const frontEnd = process.env.FRONTEND;
+const gmailUserName = process.env.GMAILID;
+const gmailPassword = process.env.GMAILPASSWORD;
+
 var SendMail = (emailId, message) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         port: 8000,
         secure: false,
         auth: {
-            user: "madhannode@gmail.com",
-            pass: "NodeMadhan123"
+            user: gmailUserName,
+            pass: gmailPassword
         }
     });
 
     let mailOptions = {
-        from: "madhannode@gmail.com",
+        from: gmailUserName,
         to: emailId,
         subject: "Password Reset Request",
         html: message
